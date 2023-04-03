@@ -2574,6 +2574,9 @@ function library:init()
                                         if bind.flag then
                                             library.flags[bind.flag] = false;
                                         end
+                                        if bind.callback then
+                                            bind.callback(false);
+                                        end
                                         bind.indicatorValue:SetEnabled(bind.invertindicator and true or false);
                                     end
                                 end
