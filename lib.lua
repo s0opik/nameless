@@ -610,6 +610,12 @@ function library:init()
     if self.hasInit then
         return
     end
+    for _, tab in next, self.tabs do
+		if tab.canInit then
+			tab:Init()
+			self:selectTab(tab)
+		end
+	end
 
     local tooltipObjects = {};
 
@@ -1935,6 +1941,7 @@ function library:init()
         function window:AddTab(text, order)
             local tab = {
                 text = text;
+                canInit = true;
                 order = order or #self.tabs+1;
                 callback = function() end;
                 objects = {};
