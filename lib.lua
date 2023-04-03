@@ -611,7 +611,6 @@ function library:init()
         return
     end
 
-
     local tooltipObjects = {};
 
     makefolder(self.cheatname)
@@ -1936,7 +1935,6 @@ function library:init()
         function window:AddTab(text, order)
             local tab = {
                 text = text;
-                canInit = true;
                 order = order or #self.tabs+1;
                 callback = function() end;
                 objects = {};
