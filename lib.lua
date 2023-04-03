@@ -610,12 +610,7 @@ function library:init()
     if self.hasInit then
         return
     end
-    for _, tab in next, self.tabs do
-		if tab.canInit then
-			tab:Init()
-			self:selectTab(tab)
-		end
-	end
+
 
     local tooltipObjects = {};
 
