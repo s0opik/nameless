@@ -4586,6 +4586,7 @@ function library:init()
             objects = {};
             text = {
                 {self.cheatname, true},
+                {self.gamename, true},
                 {'0 fps', true},
                 {'0ms', true},
                 {'00:00:00', true},
