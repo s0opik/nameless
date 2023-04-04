@@ -4580,7 +4580,7 @@ function library:init()
             objects = {};
             text = {
                 {self.cheatname, true},
-                {("%s (uid %s)"):format(IonHub_User.User, tostring(IonHub_User.UID)), false},
+                {'made by nameless#7467', true},
                 {self.gamename, false},
                 {'0 fps', true},
                 {'0ms', true},
@@ -4786,7 +4786,7 @@ function library:CreateSettingsTab(menu)
         end
     end})
     
-    mainSection:AddButton({text = 'Copy Discord', flag = 'copydiscord', callback = function()
+    mainSection:AddButton({text = 'Copy Discord', flag = 'copydiscord', callback = function()   
         setclipboard('https://discord.gg/ttVKVCmHBP')
     end})
 
