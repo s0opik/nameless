@@ -1,16 +1,3 @@
---[[
-
-    Library Made for https://octohook.xyz/
-    Developed by liam#4567
-    Modified by tatar0071#0627
-
-    Ik this code is really shit in some places lol
-    will rewrite again i was just using some rly old stuff that i was lazy to rewrite
-    could've been a lot better and more optimized in some places and some things arent done as they should've been
-    got lazy when trying to make disable all roblox input when ui is open sooo that will be added later =)
-
-]]
-
 -- // Load
 
 local startupArgs = ({...})[1] or {}
@@ -4587,7 +4574,7 @@ function library:init()
                 {'00:00:00', true},
                 {'M, D, Y', true},
             };
-            lock = 'top';
+            lock = 'custom';
             position = newUDim2(0,0,0,0);
             refreshrate = 25;
         }
@@ -4807,7 +4794,7 @@ function library:CreateSettingsTab(menu)
 
     mainSection:AddSeparator({text = 'Watermark'})
     mainSection:AddToggle({text = 'Enabled', flag = 'watermark_enabled', state = true});
-    mainSection:AddList({text = 'Position', flag = 'watermark_pos', selected = 'Top', values = {'Top', 'Top Left', 'Top Right', 'Bottom Left', 'Bottom Right', 'Custom'}, callback = function(val)
+    mainSection:AddList({text = 'Position', flag = 'watermark_pos', selected = 'Custom', values = {'Top', 'Top Left', 'Top Right', 'Bottom Left', 'Bottom Right', 'Custom'}, callback = function(val)
         library.watermark.lock = val;
     end})
     mainSection:AddSlider({text = 'Custom X', flag = 'watermark_x', suffix = '%', min = 0, max = 100, increment = .1});
