@@ -4587,7 +4587,7 @@ function library:init()
                 {'00:00:00', true},
                 {'M, D, Y', true},
             };
-            lock = 'custom';
+            lock = 'Top';
             position = newUDim2(0,0,0,0);
             refreshrate = 25;
         }
