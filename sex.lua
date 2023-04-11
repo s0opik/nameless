@@ -705,7 +705,7 @@ local function ftool(cr)
 	end
 end
 function EspInterface.getWeapon(player)
-	return '[ '..tostring(ftool(player.Character))..' ]';
+	return tostring(ftool(player.Character));
 end
 
 function EspInterface.isFriendly(player)
