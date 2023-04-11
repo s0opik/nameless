@@ -701,7 +701,7 @@ local function ftool(cr)
 	if cr:FindFirstChildOfClass("Tool") then
 		return "[" .. cr:FindFirstChildOfClass("Tool").Name .. "]"
 	else
-		return 'None'
+		return '[None]'
 	end
 end
 function EspInterface.getWeapon(player)
