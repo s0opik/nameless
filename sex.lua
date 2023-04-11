@@ -101,13 +101,6 @@ local function rotateVector(vector, radians)
 	return Vector2.new(c*vector.X - s*vector.Y, s*vector.X + c*vector.Y);
 end
 
-local function parseColor(self, color, isOutline)
-	if color == "Team Color" or (self.interface.sharedSettings.useTeamColor and not isOutline) then
-		return self.interface.getTeamColor(self.player) or Color3.new(1,1,1);
-	end
-	return color;
-end
-
 -- esp object
 local EspObject = {};
 EspObject.__index = EspObject;
@@ -194,7 +187,7 @@ end
 function EspObject:Update()
 	local interface = self.interface;
 
-	self.options = interface.teamSettings[interface.isFriendly(self.player) and "friendly" or "enemy"];
+	self.options = interface.teamSettings["enemy"];
 	self.character = interface.getCharacter(self.player);
 	self.health, self.maxHealth = interface.getHealth(self.player);
 	self.weapon = interface.getWeapon(self.player);
@@ -444,7 +437,7 @@ function ChamObject:Update()
 	local highlight = self.highlight;
 	local interface = self.interface;
 	local character = interface.getCharacter(self.player);
-	local options = interface.teamSettings[interface.isFriendly(self.player) and "friendly" or "enemy"];
+	local options = interface.teamSettings["enemy"];
 	local enabled = options.enabled and character and not
 		(#interface.whitelist > 0 and not find(interface.whitelist, self.player.UserId));
 
@@ -706,16 +699,9 @@ local function ftool(cr)
 	return 'empty'
 end
 function EspInterface.getWeapon(player)
-	return '[ '..tostring(ftool(player.Character))..' ]';
+	return '['..tostring(ftool(player.Character))..']';
 end
 
-function EspInterface.isFriendly(player)
-	return player.Team and player.Team == localPlayer.Team;
-end
-
-function EspInterface.getTeamColor(player)
-	return player.Team and player.Team.TeamColor and player.Team.TeamColor.Color;
-end
 
 function EspInterface.getCharacter(player)
 	return player.Character;
