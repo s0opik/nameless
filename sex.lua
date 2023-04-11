@@ -700,13 +700,12 @@ end
 local function ftool(cr)
 	for a,b in next, cr:GetChildren() do 
 		if b.ClassName == 'Tool' then
-			return tostring(b.Name)
+			return '[ '..tostring(b.Name)..' ]'
 		end
 	end
-	return 'empty'
 end
 function EspInterface.getWeapon(player)
-	return '['..tostring(ftool(player.Character))..']';
+	return tostring(ftool(player.Character));
 end
 
 function EspInterface.isFriendly(player)
