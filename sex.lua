@@ -198,11 +198,6 @@ function EspObject:Update()
 	self.options = interface.teamSettings[interface.isFriendly(self.player) and "friendly" or "enemy"];
 	self.character = interface.getCharacter(self.player);
 	self.health, self.maxHealth = interface.getHealth(self.player);
-	if player.Character:FindFirstChildOfClass("Tool") then
-		self.weapon = "[" .. player.Character:FindFirstChildOfClass("Tool").Name .. "]"
-	else
-		visible.weapon.Visible = false
-	end
 	self.enabled = self.options.enabled and self.character and not
 		(#interface.whitelist > 0 and not find(interface.whitelist, self.player.UserId));
 
@@ -344,7 +339,11 @@ function EspObject:Render()
 	visible.weapon.Visible = enabled and onScreen and options.weapon;
 	if visible.weapon.Visible then
 		local weapon = visible.weapon;
-		weapon.Text = self.weapon;
+		if player.Character:FindFirstChildOfClass("Tool") then
+			weapon.Text = "[" .. player.Character:FindFirstChildOfClass("Tool").Name .. "]"
+	   	else
+		   visible.weapon.Visible = false
+	   	end
 		weapon.Size = interface.sharedSettings.textSize;
 		weapon.Font = interface.sharedSettings.textFont;
 		weapon.Color = parseColor(self, options.weaponColor[1]);
