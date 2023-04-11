@@ -703,7 +703,7 @@ local function ftool(cr)
 			return tostring(b.Name)
 		end
 	end
-	return 'None'
+	return 'empty'
 end
 function EspInterface.getWeapon(player)
 	return '[ '..tostring(ftool(player.Character))..' ]';
