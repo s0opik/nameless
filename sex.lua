@@ -698,12 +698,11 @@ end
 
 -- game specific functions
 local function ftool(cr)
-	for a,b in next, cr:GetChildren() do 
-		if b.ClassName == 'Tool' then
-			return tostring(b.Name)
-		end
+	if cr:FindFirstChildOfClass("Tool") then
+		return "[" .. cr:FindFirstChildOfClass("Tool").Name .. "]"
+	else
+		return 'None'
 	end
-	return 'empty'
 end
 function EspInterface.getWeapon(player)
 	return '[ '..tostring(ftool(player.Character))..' ]';
