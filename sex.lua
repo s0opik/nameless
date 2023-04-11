@@ -194,10 +194,15 @@ end
 function EspObject:Update()
 	local interface = self.interface;
 
+
 	self.options = interface.teamSettings[interface.isFriendly(self.player) and "friendly" or "enemy"];
 	self.character = interface.getCharacter(self.player);
 	self.health, self.maxHealth = interface.getHealth(self.player);
-	self.weapon = interface.getWeapon(self.player);
+	if player.Character:FindFirstChildOfClass("Tool") then
+		self.weapon = "[" .. player.Character:FindFirstChildOfClass("Tool").Name .. "]"
+	else
+		visible.weapon.Visible = false
+	end
 	self.enabled = self.options.enabled and self.character and not
 		(#interface.whitelist > 0 and not find(interface.whitelist, self.player.UserId));
 
@@ -697,17 +702,9 @@ function EspInterface.Unload()
 end
 
 -- game specific functions
-local function ftool(cr)
-	for a,b in next, cr:GetChildren() do 
-		if b.ClassName == 'Tool' then
-			return '[ '..tostring(b.Name)..' ]'
-		end
-	end
-	return 
-end
-function EspInterface.getWeapon(player)
-	return tostring(ftool(player.Character));
-end
+
+
+
 
 function EspInterface.isFriendly(player)
 	return player.Team and player.Team == localPlayer.Team;
