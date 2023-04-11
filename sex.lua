@@ -697,16 +697,16 @@ function EspInterface.Unload()
 end
 
 -- game specific functions
-local function ftool()
-	for a,b in next, player.Character:GetChildren() do 
+local function ftool(cr)
+	for a,b in next, cr:GetChildren() do 
 		if b.ClassName == 'Tool' then
-			return '[ '..tostring(b.Name)..' ]'
+			return tostring(b.Name)
 		end
 	end
 	return 'None'
 end
 function EspInterface.getWeapon(player)
-	return tostring(ftool());
+	return '[ '..tostring(ftool(player.Character))..' ]';
 end
 
 function EspInterface.isFriendly(player)
