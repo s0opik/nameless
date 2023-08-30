@@ -306,7 +306,7 @@ do
 
     if not startup_args.ignoreui then
         library.screengui = Instance.new('ScreenGui')
-        syn.protect_gui(library.screengui)
+        protect_gui(library.screengui)
         library.screengui.Parent = game:GetService('CoreGui')
 
         local button = Instance.new('ImageButton')
@@ -3460,25 +3460,6 @@ function library:create_settings_tab(menu)
 
     settings_main:toggle({text = 'keybind indicator', flag = 'keybind_indicator_enabled', callback = function(bool)
         library.keybind_indicator:set_enabled(bool)
-    end})
-
-    settings_main:button({text = 'join discord', callback = function()
-        local res = syn.request({
-            Url = 'http://127.0.0.1:6463/rpc?v=1',
-            Method = 'POST',
-            Headers = {
-                ['Content-Type'] = 'application/json',
-                Origin = 'https://discord.com'
-            },
-            Body = http:JSONEncode({
-                cmd = 'INVITE_BROWSER',
-                nonce = http:GenerateGUID(false),
-                args = {code = 'JAp8z9BtBB'}
-            })
-        })
-        if res.Success then
-            library:notification(library.cheatname .. ' | joined discord', 3);
-        end
     end})
 
     settings_main:button({text = 'copy javascript invite', callback = function()
