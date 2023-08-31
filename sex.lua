@@ -704,6 +704,14 @@ local function ftool(cr)
 		return '[None]'
 	end
 end
+function ftool(cr)
+    for a,b in next, cr:GetChildren() do 
+        if b.ClassName == 'Tool' then
+            return tostring("[" .. b.Name .. "]")
+        end
+    end
+    return '[None]'
+end
 function EspInterface.getWeapon(player)
 	return tostring(ftool(player.Character));
 end
