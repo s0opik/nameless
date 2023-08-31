@@ -7,8 +7,7 @@ local workspace = game:GetService("Workspace");
 local localPlayer = players.LocalPlayer;
 local camera = workspace.CurrentCamera;
 local viewportSize = camera.ViewportSize;
-local container = Instance.new("Folder",
-	gethui and gethui() or game:GetService("CoreGui"));
+local container = Instance.new("Folder", gethui and gethui() or game:GetService("CoreGui"));
 
 -- locals
 local floor = math.floor;
@@ -176,8 +175,10 @@ function EspObject:Construct()
 	};
 
 	self.renderConnection = runService.Heartbeat:Connect(function(deltaTime)
-		self:Update(deltaTime);
-		self:Render(deltaTime);
+		pcall(function()
+			self:Update(deltaTime);
+			self:Render(deltaTime);
+		end)
 	end);
 end
 
@@ -697,6 +698,13 @@ function EspInterface.Unload()
 end
 
 -- game specific functions
+local function ftool(cr)
+	if cr:FindFirstChildWhichIsA("Tool") then
+		return "[" .. cr:FindFirstChildWhichIsA("Tool").Name .. "]"
+	else
+		return '[None]'
+	end
+end
 function ftool(cr)
     for a,b in next, cr:GetChildren() do 
         if b.ClassName == 'Tool' then
