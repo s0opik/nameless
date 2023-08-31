@@ -1401,7 +1401,7 @@ function components.toggle(holder, options, zindex)
         end
     end
 
-    function toggle_types:Slider(options)
+    function toggle_types:AddSlider(options)
         return components.slider(holder, options, zindex + 2)
     end
 
@@ -1409,7 +1409,7 @@ function components.toggle(holder, options, zindex)
         return components.dropdown(holder, options, zindex + 2)
     end
 
-    function toggle_types:Colorpicker(options)
+    function toggle_types:AddColor(options)
         return components.colorpicker(holder, options, zindex + 2)
     end
 
@@ -2796,7 +2796,7 @@ function components.list(options)
         add(str, theme)
     end
 
-    function list_types:Toggle()
+    function list_types:AddToggle()
         list.Visible = not list.Visible
     end
 
@@ -2842,7 +2842,7 @@ function library:Unload(fade)
 
     if fade then
         if self.holder.Visible then
-            self:Toggle()
+            self:AddToggle()
             wait(self.tween_speed + 0.5)
         end
     end
@@ -2881,7 +2881,7 @@ function library:Unload(fade)
     end
 end
 
-function library:Toggle()
+function library:AddToggle()
     if not self.opening then
         self.opening = true
         self.Playerlist.object.Visible = self.Playerlist.toggled and not self.open or false
@@ -2940,7 +2940,7 @@ function library:FadeIn()
     self.holder.Visible = false
 
     wait(0.1)
-    self:Toggle()
+    self:AddToggle()
 
     if self.watermark and typeof(self.watermark) ~= "function" then
         self.watermark.Visible = true
@@ -3655,7 +3655,7 @@ function library:Watermark(str)
 
     local watermark_types = {}
 
-    function watermark_types:Toggle()
+    function watermark_types:AddToggle()
         library.watermark.Visible = not library.watermark.Visible
     end
 
@@ -3974,7 +3974,7 @@ function library:Playerlist(max_players)
 
     self.Playerlist = {button_size = 0, labels = 0, object = list, toggled = true}
 
-    function library.Playerlist:Button(options)
+    function library.Playerlist:AddButton(options)
         utility.format(options)
 
         utility.defaults(options, {
@@ -4279,7 +4279,7 @@ function library:Window(options)
         return column_types
     end]]
 
-    function window_types:Section(options)
+    function window_types:AddSection(options)
         if self.has_subtabs then return end
 
         utility.format(options);
@@ -4362,11 +4362,11 @@ function library:Window(options)
             return components.separator(self, str, 80)
         end
 
-        function section_types:Button(options)
+        function section_types:AddButton(options)
             return components.button(self, options, 79)
         end
 
-        function section_types:Toggle(options)
+        function section_types:AddToggle(options)
             utility.format(options)
             options.name = options.name or "toggle"
 
@@ -4394,7 +4394,7 @@ function library:Window(options)
             return components.box(self, options, 79)
         end
 
-        function section_types:Slider(options)
+        function section_types:AddSlider(options)
             utility.format(options)
             options.name = options.name or "slider"
 
@@ -4467,7 +4467,7 @@ function library:Window(options)
             return components.keybind(holder, options, 81)
         end
 
-        function section_types:Colorpicker(options)
+        function section_types:AddColor(options)
             utility.format(options)
             options.name = options.name or "colorpicker"
 
@@ -4523,7 +4523,7 @@ function library:Window(options)
         return section_types;
     end
 
-    function window_types:Toggle()
+    function window_types:AddToggle()
         window_types.Visible = not window_types.Visible;
 
         if library.open then
@@ -4593,7 +4593,7 @@ function library:Load(options)
     self.keybind_list = components.list{name = "Keybinds", flag = "keybind list", position = newUDim2(0, 16, 0.5, -100)}
 
     if not options.keybindlist then
-        self.keybind_list:Toggle()
+        self.keybind_list:AddToggle()
     end
 
     self.holder = Render:Create("Square", {
@@ -4626,7 +4626,7 @@ function library:Load(options)
         Theme = "Text",
         ZIndex = 4
     }).MouseButton1Click:Connect(function()
-        library:Toggle()
+        library:AddToggle()
     end)
     
     local main = self.holder:Create("Square", {
@@ -4676,7 +4676,7 @@ function library:Load(options)
     
     local window_types = {tab_buttons = {}, text_bounds = library.title_bounds, player_cache = {}}
 
-    function window_types:Tab(name)
+    function window_types:AddTab(name)
         name = name or "tab"
         
         local first = #tab_background:GetChildren() == 0
@@ -4967,11 +4967,11 @@ function library:Load(options)
                     return components.separator(self, str)
                 end
     
-                function section_types:Button(options)
+                function section_types:AddButton(options)
                     return components.button(self, options)
                 end
     
-                function section_types:Toggle(options)
+                function section_types:AddToggle(options)
                     utility.format(options)
                     options.name = options.name or "toggle"
     
@@ -4999,7 +4999,7 @@ function library:Load(options)
                     return components.box(self, options)
                 end
 
-                function section_types:Slider(options)
+                function section_types:AddSlider(options)
                     utility.format(options)
                     options.name = options.name or "slider"
     
@@ -5072,7 +5072,7 @@ function library:Load(options)
                     return components.keybind(holder, options)
                 end
 
-                function section_types:Colorpicker(options)
+                function section_types:AddColor(options)
                     utility.format(options)
                     options.name = options.name or "colorpicker"
 
@@ -5131,7 +5131,7 @@ function library:Load(options)
             return unpack(sections)
         end
 
-        function tab_types:Section(options)
+        function tab_types:AddSection(options)
             utility.format(options)
 
             utility.defaults(options, {
@@ -5152,8 +5152,8 @@ function library:Load(options)
     function window_types:SettingsTab(watermark, unload)
         unload = unload or function() library.unload(library) end
 
-        local settings = self:Tab("Settings")
-        local configs = settings:Section{name = "Configs"}
+        local settings = self:AddTab("Settings")
+        local configs = settings:AddSection{name = "Configs"}
         local autoload
 
         local config_dropdown = configs:Dropdown{
@@ -5172,7 +5172,7 @@ function library:Load(options)
             end
         }
 
-        configs:Button{
+        configs:AddButton{
             name = "Refresh Configs",
             callback = function()
                 config_dropdown:Refresh(library:GetConfigs())
@@ -5185,7 +5185,7 @@ function library:Load(options)
             ignored = true
         }
 
-        configs:Button{
+        configs:AddButton{
             name = "Create Config",
             callback = function()
                 if library:CreateConfig(library.flags["config_name"]) and not config_dropdown:Exists(library.flags["config_name"]) then
@@ -5195,7 +5195,7 @@ function library:Load(options)
             end
         }
 
-        configs:Button{
+        configs:AddButton{
             name = "Save Config",
             callback = function()
                 if library.flags["selected_config"] then
@@ -5206,7 +5206,7 @@ function library:Load(options)
             end
         }
 
-        configs:Button{
+        configs:AddButton{
             name = "Load Config",
             callback = function()
                 if (library:LoadConfig(library.flags["selected_config"])) then
@@ -5215,7 +5215,7 @@ function library:Load(options)
             end
         }
 
-        configs:Button{
+        configs:AddButton{
             name = "Delete Config",
             callback = function()
                 local selected = library.flags["selected_config"];
@@ -5227,7 +5227,7 @@ function library:Load(options)
             end
         }
 
-        autoload = configs:Toggle{
+        autoload = configs:AddToggle{
             name = "Autoload Config",
             default = false,
             flag = "auto_load",
@@ -5264,7 +5264,7 @@ function library:Load(options)
             ignored = true
         }
 
-        themes:Button{
+        themes:AddButton{
             name = "Create Theme",
             callback = function()
                 if library:SaveTheme(library.flags["theme_name"]) and not config_dropdown:Exists(library.flags["theme_name"]) then
@@ -5273,7 +5273,7 @@ function library:Load(options)
             end
         }
 
-        themes:Button{
+        themes:AddButton{
             name = "Save Theme",
             callback = function()
                 if library.flags["selected_theme"] then
@@ -5283,7 +5283,7 @@ function library:Load(options)
             end
         }
 
-        themes:Button{
+        themes:AddButton{
             name = "Load Theme",
             callback = function()
                 library:LoadTheme(library.flags["selected_theme"])
@@ -5294,7 +5294,7 @@ function library:Load(options)
             end
         }
 
-        themes:Button{
+        themes:AddButton{
             name = "Delete Theme",
             callback = function()
                 if library:DeleteTheme(library.flags["selected_theme"]) then
@@ -5304,7 +5304,7 @@ function library:Load(options)
         }
 
         for _, option in next, theme_options do
-            theme_colorpickers[option] = customTheme:Colorpicker{
+            theme_colorpickers[option] = customTheme:AddColor{
                 name = option,
                 default = library.theme[option],
                 ignored = true,
@@ -5316,16 +5316,16 @@ function library:Load(options)
         end
 
         if watermark then
-            local watermark_section = settings:Section{name = "Watermark"}
-            watermark:Toggle()
+            local watermark_section = settings:AddSection{name = "Watermark"}
+            watermark:AddToggle()
 
-            watermark_section:Toggle{
+            watermark_section:AddToggle{
                 name = "Show Watermark",
                 default = true,
                 flag = "show_watermark",
                 callback = function(bool)
                     if library.watermark.Visible ~= bool then
-                        watermark:Toggle()
+                        watermark:AddToggle()
                     end
                 end
             }
@@ -5345,9 +5345,9 @@ function library:Load(options)
             }
         end
 
-        local notifications_section = settings:Section{name = "Notifications"}
+        local notifications_section = settings:AddSection{name = "Notifications"}
 
-        notifications_section:Slider{
+        notifications_section:AddSlider{
             name = "Notification Speed",
             default = library.notification_speed,
             min = 0,
@@ -5370,20 +5370,20 @@ function library:Load(options)
             end
         }
 
-        local misc = settings:Section{name = "Cheat", Side = "right"}
+        local misc = settings:AddSection{name = "Cheat", Side = "right"}
 
-        misc:Toggle{
+        misc:AddToggle{
             name = "Show Keybind List",
             default = library.keybind_list_default,
             flag = "keybind_list",
             callback = function(value)
                 if library.keybind_list.object.Visible ~= value then
-                    library.keybind_list:Toggle()
+                    library.keybind_list:AddToggle()
                 end
             end
         }
 
-        misc:Toggle{
+        misc:AddToggle{
             name = "Show Player List",
             default = library.keybind_list_default,
             flag = "player_list",
@@ -5396,7 +5396,7 @@ function library:Load(options)
             end
         }
 
-        --[[misc:Toggle{
+        --[[misc:AddToggle{
             name = "Performance Drag",
             default = library.performance_drag,
             flag = "performance_drag",
@@ -5413,7 +5413,7 @@ function library:Load(options)
             listignored = true,
             callback = function(_, from_setting)
                 if not from_setting then
-                    library:Toggle()
+                    library:AddToggle()
                 end
             end
         }
@@ -5433,7 +5433,7 @@ function library:Load(options)
             end
         }
 
-        misc:Slider{
+        misc:AddSlider{
             name = "Tween Speed",
             default = library.tween_speed,
             min = 0,
@@ -5444,7 +5444,7 @@ function library:Load(options)
             end
         }
 
-        misc:Slider{
+        misc:AddSlider{
             name = "Fade Speed",
             default = library.fade_speed,
             min = 0,
@@ -5465,28 +5465,28 @@ function library:Load(options)
             end
         }
 
-        misc:Button{
+        misc:AddButton{
             name = "Unload",
             callback = unload or function()
                 library:Unload();
             end
         }
 
-        misc:Button{
+        misc:AddButton{
             name = "Copy Game Invite (CONSOLE)",
             callback = function()
                 setclipboard(('Roblox.GameLauncher.joinGameInstance(%s, "%s")'):format(game.PlaceId, game.JobId))
             end
         }
 
-        misc:Button{
+        misc:AddButton{
             name = "Copy Game Invite (LUA)",
             callback = function()
                 setclipboard(('game:GetService("TeleportService"):TeleportToPlaceInstance(%s, "%s")'):format(game.PlaceId, game.JobId))
             end
         }
 
-        misc:Button{
+        misc:AddButton{
             name = "Join Discord Server",
             callback = function()
                 request{
@@ -5505,7 +5505,7 @@ function library:Load(options)
             end
         }
 
-        misc:Button{
+        misc:AddButton{
             name = "Copy Discord Invite",
             callback = function()
                 setclipboard(library.discord)
