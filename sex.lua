@@ -1,4 +1,4 @@
--- services
+pcall(function()-- services
 local runService = game:GetService("RunService");
 local players = game:GetService("Players");
 local workspace = game:GetService("Workspace");
@@ -697,6 +697,7 @@ function EspInterface.Unload()
 end
 
 -- game specific functions
+
 local function ftool(cr)
 	if cr:FindFirstChildOfClass("Tool") then
 		return "[" .. cr:FindFirstChildOfClass("Tool").Name .. "]"
@@ -730,3 +731,4 @@ function EspInterface.getHealth(player)
 end
 
 return EspInterface;
+end)
