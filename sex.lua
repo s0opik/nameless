@@ -197,9 +197,7 @@ function EspObject:Update()
 	self.options = interface.teamSettings[interface.isFriendly(self.player) and "friendly" or "enemy"];
 	self.character = interface.getCharacter(self.player);
 	self.health, self.maxHealth = interface.getHealth(self.player);
-	pcall(function()
-		self.weapon = interface.getWeapon(self.player);
-	end)
+	self.weapon = interface.getWeapon(self.player);
 	self.enabled = self.options.enabled and self.character and not
 		(#interface.whitelist > 0 and not find(interface.whitelist, self.player.UserId));
 
@@ -699,7 +697,6 @@ function EspInterface.Unload()
 end
 
 -- game specific functions
-
 local function ftool(cr)
 	if cr:FindFirstChildOfClass("Tool") then
 		return "[" .. cr:FindFirstChildOfClass("Tool").Name .. "]"
@@ -708,9 +705,7 @@ local function ftool(cr)
 	end
 end
 function EspInterface.getWeapon(player)
-	pcall(function()
-		return tostring(ftool(player.Character));
-	end)
+	return tostring(ftool(player.Character));
 end
 
 function EspInterface.isFriendly(player)
