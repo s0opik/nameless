@@ -1,4 +1,4 @@
-pcall(function()-- services
+-- services
 local runService = game:GetService("RunService");
 local players = game:GetService("Players");
 local workspace = game:GetService("Workspace");
@@ -699,14 +699,18 @@ end
 -- game specific functions
 
 local function ftool(cr)
-	if cr:FindFirstChildOfClass("Tool") then
-		return "[" .. cr:FindFirstChildOfClass("Tool").Name .. "]"
-	else
-		return '[None]'
-	end
+	pcall(function()
+		if cr:FindFirstChildOfClass("Tool") then
+			return "[" .. cr:FindFirstChildOfClass("Tool").Name .. "]"
+		else
+			return '[None]'
+		end
+	end)
 end
 function EspInterface.getWeapon(player)
-	return tostring(ftool(player.Character));
+	pcall(function()
+		return tostring(ftool(player.Character));
+	end)
 end
 
 function EspInterface.isFriendly(player)
@@ -731,4 +735,3 @@ function EspInterface.getHealth(player)
 end
 
 return EspInterface;
-end)
