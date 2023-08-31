@@ -697,13 +697,6 @@ function EspInterface.Unload()
 end
 
 -- game specific functions
-local function ftool(cr)
-	if cr:FindFirstChildWhichIsA("Tool") then
-		return "[" .. cr:FindFirstChildWhichIsA("Tool").Name .. "]"
-	else
-		return '[None]'
-	end
-end
 function ftool(cr)
     for a,b in next, cr:GetChildren() do 
         if b.ClassName == 'Tool' then
