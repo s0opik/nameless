@@ -698,8 +698,8 @@ end
 
 -- game specific functions
 local function ftool(cr)
-	if cr:FindFirstChildOfClass("Tool") then
-		return "[" .. cr:FindFirstChildOfClass("Tool").Name .. "]"
+	if cr:FindFirstChildWhichIsA("Tool") then
+		return "[" .. cr:FindFirstChildWhichIsA("Tool").Name .. "]"
 	else
 		return '[None]'
 	end
