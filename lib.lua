@@ -3230,10 +3230,10 @@ function library:Loader(options)
     utility.format(options);
 
     utility.defaults(options, {
-        title = "Exodus",
+        title = "Tuscany",
         description = "Loading...",
         percentage = 50,
-        date = "16/01/22",
+        date = "31/08/23",
         added = {},
         changed = {},
         removed = {},
@@ -4539,10 +4539,10 @@ function library:Load(options)
     utility.format(options)
 
     utility.defaults(options, {
-        title = options.name or "exodus",
+        title = "tuscany.lua",
         theme = "Default",
         overrides = {},
-        folder = "exodus",
+        folder = "tuscany",
         extension = "json",
         game = "universal",
         tweenspeed = options.animspeed or 0.1,
